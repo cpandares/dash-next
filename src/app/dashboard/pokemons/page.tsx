@@ -1,4 +1,5 @@
-import { PokemonGrid, PokemonsResponse, SimplePokemon } from "@/app/pokemons";
+
+import { PokemonGrid, PokemonsResponse, SimplePokemon } from "@/pokemons";
 import Image from "next/image";
 
 
