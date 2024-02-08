@@ -7,6 +7,12 @@ interface Props {
 }
 
 
+export const metadata = {
+ title: 'Listado de pokemons',
+ description: 'Listado de pokemons en una grilla',
+};
+
+
 export const PokemonGrid = ({ pokemons }: Props) => {
   return (
     <div className="flex flex-wrap gap-10 items-center justify-center">
