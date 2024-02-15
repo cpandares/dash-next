@@ -5,7 +5,7 @@ import type { TypedUseSelectorHook } from 'react-redux';
 import counterReducer from './counter/counterSlice';
 export const store = configureStore({
   reducer: {
-    count: counterReducer,
+    counter: counterReducer,
   },
 })
 
