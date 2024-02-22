@@ -2,37 +2,22 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { SimplePokemon } from '@/pokemons';
 
 interface PokemonsState {
-    [key: string]: SimplePokemon;
+    favorites:{ [key: string]: SimplePokemon },
 }
 
 
 const getInitialState = () => {
-    const favorites = localStorage.getItem('favorites');
+    /* const favorites = localStorage.getItem('favorites');
     if(favorites) {
         return JSON.parse(favorites);
     }
-    return {};
+    return {}; */
 
 }
 
 const initialState:PokemonsState = {
-    /* '1': {
-        id: '1',
-        name: 'bulbasaur',        
-    },
-    '2': {
-        id: '2',
-        name: 'ivysaur',        
-    },
-    '3': {
-        id: '3',
-        name: 'venusaur',        
-    },
-    '4': {
-        id: '4',
-        name: 'charmander',        
-    }, */
-    ...getInitialState()
+    favorites:{}
+    
 } 
 
 
@@ -40,20 +25,24 @@ const pokemonsSlice = createSlice({
   name: 'pokemons',
   initialState,
   reducers: {
+    setFavorite(state, action:PayloadAction<{[key: string]: SimplePokemon}>) {
+        state.favorites = action.payload;
+    },
     toggleFavorite(state, action:PayloadAction<SimplePokemon>) {
         const pokemon = action.payload;
-        if(state[pokemon.id]) {
-            delete state[pokemon.id];
+        if(state.favorites[pokemon.id]) {
+            delete state.favorites[pokemon.id];
         } else {
-            state[pokemon.id] = pokemon;
+            state.favorites[pokemon.id] = pokemon;
            
         }
         //No es una buena practica guardar en el localstorage en cada cambio en redux 
-        localStorage.setItem('favorites', JSON.stringify(state));
-    }
+        localStorage.setItem('favorites', JSON.stringify(state.favorites));
+    },
+   
   }
 });
 
-export const { toggleFavorite } = pokemonsSlice.actions
+export const { toggleFavorite,setFavorite } = pokemonsSlice.actions
 
 export default pokemonsSlice.reducer
